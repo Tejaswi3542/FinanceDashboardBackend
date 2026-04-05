@@ -1,2 +1,49 @@
-Project name:- Finance Data Processing and Access Control Backend.
-hcbsh
+# Finance Dashboard Backend
+
+A role-based finance management backend built with Spring Boot. The system allows users to manage financial records, view dashboard 
+analytics, and enforces strict access control based on user roles.
+
+## Tech Stack
+
+- Java 17
+- Spring Boot
+- Spring Security
+- JSON Web Tokens (JWT)
+- MySQL
+- Spring Data JPA / Hibernate
+- Maven
+
+### Features
+
+- JWT based authentication and authorization
+- Role based access control (VIEWER, ANALYST, ADMIN)
+- Financial records management with filtering
+- Dashboard summary APIs for analytics
+- Input validation and global error handling
+
+#### Project Overview:-
+I have created Finance Data Processing and Access Control Backend system using Java, Spring boot and MySQL as databse. You can perform 
+CRUD operations on Records and User data if you have rights to do so. So when you will start the application, the spring boot perform 
+its tasks like bean creation, spring security (securing endpoints) and many more. I have tested all the APIs using Postman and used 
+Eclipse IDE for creating project. There is three main part of this project. First is the main method from where application starts. 
+Second is the Record and Dashboard handling part where you will find the different java files to manage record and dashboard summary. 
+Third and the most interesting part is the security part which handles the authentication and authorization using spring security 
+and JWT.
+
+At first you will register yourself by hitting the "POST: api/auth/register" API and providing username, password role in JSON body.
+Now your username and hashed password is stored in database with role.
+Now you will hit login api "POST: api/auth/login" and passing username and password in the body of Postman. The security part of the 
+application will check if the username exist in database. If the user exists, now your sent password is hashed again and compared with
+the stored hash password. If it matches, a JWT token is generated which contains your username and role. Now with every request you 
+send that token in the header tab, and application checks your role, and if your role permits you to hit that API, you will get the 
+result otherwise 403 error will be thrown. There are three types of User:- VIEWER,ANALYST,ADMIN. An user with VIEWER role is only 
+allowed to see the data. User with ANALYST role can access differnt Dashboard summary APIs which is useful for an analyst. And User 
+with ADMIN right can perform any action in the application. 
+
+I have used clean architecture and followed Controller, Service and Repository layer design.
+
+
+I have used JWT for authentication and authorization because it is stateless in nature and since role is also mentioned in the token 
+so application doesn't need to look database for on every request.
+
+Before running this project, edit the application.properties file with real values.
