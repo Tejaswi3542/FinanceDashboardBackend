@@ -39,4 +39,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return "User registered successfully";
     }
+    
+    public String deleteUserById(Long id) {
+    	User user=userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with this id doesn't exist"));
+    	if(user.getRole()==Role.ADMIN) throw new RuntimeException("Can't delete user with ADMIN role..");
+    	userRepository.deleteById(id);
+    	return "User deleted succesfully";
+    }
 }

@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity          // ← enables @PreAuthorize to work
+@EnableMethodSecurity          //enables @PreAuthorize to work
 public class SecurityConfig {
 
     @Autowired
@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                .anyRequest().authenticated()   // ← just ensure user is logged in
+                .anyRequest().authenticated()   //just ensure user is logged in
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
